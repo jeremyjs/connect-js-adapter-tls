@@ -1,27 +1,31 @@
-const
-    test = require('ava'),
-    ProtoMessages = require('connect-protobuf-messages'),
-    EncodeDecode = require('connect-js-encode-decode'),
-    protocol = new ProtoMessages([
-        {
-            file: 'node_modules/connect-protobuf-messages/src/main/protobuf/CommonMessages.proto',
-            protoPayloadType: 'ProtoPayloadType'
-        }
-    ]),
-    encodeDecode = new EncodeDecode(),
-    codec = require('connect-js-codec').codec(encodeDecode, protocol),
-    port = 5032,
-    host = null,
-    createAdapter = require('../index'),
-    adapter = createAdapter(codec);
+const test = require('ava')
+const { Codec } = require('connect-js-codec')
+const EncodeDecode = require('connect-js-encode-decode')
+const ProtoMessages = require('connect-protobuf-messages')
+
+const createAdapter = require('../index')
+
+const port = 5035
+const host = null
+
+const encodeDecode = new EncodeDecode()
+const protocol = new ProtoMessages([
+  { file: 'CommonMessages.proto'  },
+  { file: 'OpenApiMessages.proto' },
+])
+
+const codec = new Codec(encodeDecode, protocol)
+
+const adapter = createAdapter(codec)
 
 test.cb('handle connect error', t => {
-    protocol.load();
-    protocol.build();
+  protocol.load()
+  protocol.build()
 
-    adapter.onData(() => {});
-    adapter.onError(() => {
-        t.end();
-    });
-    adapter.connect(port, host);
-});
+  adapter.onData(() => {})
+  adapter.onError(() => {
+    t.end()
+  })
+  
+  adapter.connect(port, host)
+})

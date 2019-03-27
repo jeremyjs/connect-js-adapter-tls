@@ -10,7 +10,8 @@
   "author": "Spotware Services <connect@spotware.com>",
   "private": true,
   "scripts": {
-    "test": "nyc ava"
+    "test": "nyc ava",
+    "watch-test": "nyc ava -w"
   },
   "ava": {
     "files": [
