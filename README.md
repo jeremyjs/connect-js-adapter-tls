@@ -4,5 +4,5 @@
 Spotware Connect network adapter for TLS socket connection Node.js
 
 ## TODO
-* Update to use new Open API 2.0 (latest - v6.0) in tests
-* Switch to use all `jeremyjs/*` packages
+* -Update to use new Open API 2.0 (latest - v6.0) in tests-
+* Update `state-emitter` to latest version
