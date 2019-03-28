@@ -999,9 +999,9 @@ configstore@^3.0.0:
     write-file-atomic "^2.0.0"
     xdg-basedir "^3.0.0"
 
-connect-js-codec@jeremyjs/connect-js-codec#jeremyjs.convert-to-class:
+connect-js-codec@jeremyjs/connect-js-codec#jeremyjs.update-package-versions:
   version "1.0.4"
-  resolved "https://codeload.github.com/jeremyjs/connect-js-codec/tar.gz/7694d6f480704058dbcafbbcf879f91c8260f79b"
+  resolved "https://codeload.github.com/jeremyjs/connect-js-codec/tar.gz/49077bc9f6e26a071a553f23745cf3d6e67895b8"
   dependencies:
     "@types/node" "7.0.14"
 

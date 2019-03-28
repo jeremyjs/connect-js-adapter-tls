@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "ava": "0.19.1",
-    "connect-js-codec": "jeremyjs/connect-js-codec#jeremyjs.convert-to-class",
+    "connect-js-codec": "jeremyjs/connect-js-codec#jeremyjs.update-package-versions",
     "connect-js-encode-decode": "jeremyjs/connect-js-encode-decode",
     "connect-protobuf-messages": "jeremyjs/connect-protobuf-messages#jeremyjs.update-input-format",
     "nyc": "10.2.0"
