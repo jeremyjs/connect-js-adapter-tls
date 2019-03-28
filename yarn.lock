@@ -1005,9 +1005,9 @@ connect-js-codec@jeremyjs/connect-js-codec#jeremyjs.update-package-versions:
   dependencies:
     "@types/node" "7.0.14"
 
-connect-js-encode-decode@jeremyjs/connect-js-encode-decode:
+connect-js-encode-decode@jeremyjs/connect-js-encode-decode#jeremyjs.update-openapi-version-in-tests:
   version "1.0.0"
-  resolved "https://codeload.github.com/jeremyjs/connect-js-encode-decode/tar.gz/29b72952c86c94f555019f3021af14e3c5f74cab"
+  resolved "https://codeload.github.com/jeremyjs/connect-js-encode-decode/tar.gz/46ce38fc6172e71f153b968851ffaa32ca12a41f"
   dependencies:
     buffer "4.5.1"
 
