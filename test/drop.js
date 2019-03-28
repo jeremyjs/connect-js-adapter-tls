@@ -16,14 +16,16 @@ const codec = new Codec(encodeDecode, protocol)
 
 const adapter = createAdapter(codec)
 
-test.cb('inacitve socket should be closed', t => {
+test.cb.skip('inactive socket should be closed', t => {
   protocol.load()
   protocol.build()
 
   adapter.onData(() => {})
+  
   adapter.onEnd(() => {
+    adapter.disconnect()
     t.end()
   })
   
-  adapter.connect(port, host)
+  adapter.connect({ host, port })
 })

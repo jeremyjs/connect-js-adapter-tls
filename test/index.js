@@ -37,13 +37,14 @@ test.cb('send version request and receive response', (t) => {
   })
   
   adapter.onData((payload_type, response, id) => {
+    adapter.disconnect()
+    
     t.is(version_res, payload_type)
     t.is('60', response.version)
     t.is(client_msg_id, id)
+
     t.end()
   })
   
-  // TODO: host and port should be in a config object
-  //   i.e. { host, port }
-  adapter.connect(port, host)
+  adapter.connect({ host, port })
 })
