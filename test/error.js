@@ -15,6 +15,17 @@ const codec = new Codec(encodeDecode, protocol)
 
 const adapter = createAdapter(codec)
 
+test.cb('throws error when `codec` is falsey', (t) => {
+  const error = t.throws(() => {
+    const null_codec = null
+    createAdapter(null_codec)
+	}, Error)
+
+  t.is(error.message, 'Invalid value for required parameter codec: null')
+
+  t.end()
+})
+
 test.cb('throws error when `host` or `port` are falsey', (t) => {
   protocol.load()
   protocol.build()

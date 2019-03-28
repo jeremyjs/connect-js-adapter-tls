@@ -4,6 +4,12 @@ const tls = require("tls");
 const { StateEmitter } = require("state-emitter");
 
 module.exports = function (codec) {
+  if (!codec) {
+    throw new Error(
+      `Invalid value for required parameter codec: ${codec}`
+    )
+  }
+  
   let socket;
   const connected = true;
   const disconnected = false;
