@@ -1,17 +1,18 @@
 const test = require('ava')
 const { Codec } = require('connect-js-codec')
 const EncodeDecode = require('connect-js-encode-decode')
-const ProtoMessages = require('connect-protobuf-messages')
+const OpenApiProtocol = require('open-api-protocol')
 
 const createAdapter = require('../index')
 
 const { host, port } = require('./config')
 
 const encodeDecode = new EncodeDecode()
-const protocol = new ProtoMessages([
-  { file: 'CommonMessages.proto'  },
-  { file: 'OpenApiMessages.proto' },
-])
+const protocol = new OpenApiProtocol()
+
+// TODO: move these into the protocol initializer
+protocol.load()
+protocol.build()
 
 const codec = new Codec(encodeDecode, protocol)
 
@@ -23,10 +24,6 @@ test.cb('send version request and receive response', (t) => {
   const version_res = 2105
   const payload = {}
   const client_msg_id = 'uuid'
-
-  // TODO: move these into the protocol initializer
-  protocol.load()
-  protocol.build()
 
   adapter.onOpen(() => {
     adapter.send({

@@ -24,9 +24,9 @@
   },
   "devDependencies": {
     "ava": "0.19.1",
-    "connect-js-codec": "jeremyjs/connect-js-codec#jeremyjs.update-package-versions",
-    "connect-js-encode-decode": "jeremyjs/connect-js-encode-decode#jeremyjs.update-openapi-version-in-tests",
-    "connect-protobuf-messages": "jeremyjs/connect-protobuf-messages#jeremyjs.update-input-format",
+    "connect-js-codec": "jeremyjs/connect-js-codec#v1.1.0",
+    "connect-js-encode-decode": "jeremyjs/connect-js-encode-decode#v1.0.1",
+    "open-api-protocol": "jeremyjs/open-api-protocol#v3.0.0",
     "nyc": "10.2.0"
   }
 }
