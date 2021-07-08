@@ -1,27 +1,27 @@
-const
-    test = require('ava'),
-    ProtoMessages = require('connect-protobuf-messages'),
-    EncodeDecode = require('connect-js-encode-decode'),
-    protocol = new ProtoMessages([
-        {
-            file: 'node_modules/connect-protobuf-messages/src/main/protobuf/CommonMessages.proto',
-            protoPayloadType: 'ProtoPayloadType'
-        }
-    ]),
-    encodeDecode = new EncodeDecode(),
-    codec = require('connect-js-codec').codec(encodeDecode, protocol),
-    port = 5032,
-    host = 'sandbox-tradeapi.spotware.com',
-    createAdapter = require('../index'),
-    adapter = createAdapter(codec);
+const test = require('ava')
+const { Codec } = require('connect-js-codec')
+const EncodeDecode = require('connect-js-encode-decode')
+const OpenApiProtocol = require('open-api-protocol')
 
-test.cb('inacitve socket should be closed', t => {
-    protocol.load();
-    protocol.build();
+const { host, port } = require('./config')
+const createAdapter = require('../index')
 
-    adapter.onData(() => {});
-    adapter.onEnd(() => {
-        t.end();
-    });
-    adapter.connect(port, host);
-});
+const encodeDecode = new EncodeDecode()
+const protocol = new OpenApiProtocol()
+protocol.load()
+protocol.build()
+
+const codec = new Codec(encodeDecode, protocol)
+
+const adapter = createAdapter(codec)
+
+test.cb.skip('inactive socket should be closed', t => {
+  adapter.onData(() => {})
+  
+  adapter.onEnd(() => {
+    adapter.disconnect()
+    t.end()
+  })
+  
+  adapter.connect({ host, port })
+})

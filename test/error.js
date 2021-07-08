@@ -1,27 +1,42 @@
-const
-    test = require('ava'),
-    ProtoMessages = require('connect-protobuf-messages'),
-    EncodeDecode = require('connect-js-encode-decode'),
-    protocol = new ProtoMessages([
-        {
-            file: 'node_modules/connect-protobuf-messages/src/main/protobuf/CommonMessages.proto',
-            protoPayloadType: 'ProtoPayloadType'
-        }
-    ]),
-    encodeDecode = new EncodeDecode(),
-    codec = require('connect-js-codec').codec(encodeDecode, protocol),
-    port = 5032,
-    host = null,
-    createAdapter = require('../index'),
-    adapter = createAdapter(codec);
+const test = require('ava')
+const { Codec } = require('connect-js-codec')
+const EncodeDecode = require('connect-js-encode-decode')
+const OpenApiProtocol = require('open-api-protocol')
 
-test.cb('handle connect error', t => {
-    protocol.load();
-    protocol.build();
+const createAdapter = require('../index')
 
-    adapter.onData(() => {});
-    adapter.onError(() => {
-        t.end();
-    });
-    adapter.connect(port, host);
-});
+const encodeDecode = new EncodeDecode()
+const protocol = new OpenApiProtocol()
+protocol.load()
+protocol.build()
+
+const codec = new Codec(encodeDecode, protocol)
+
+const adapter = createAdapter(codec)
+
+test.cb('throws error when `codec` is falsey', (t) => {
+  const error = t.throws(() => {
+    const null_codec = null
+    createAdapter(null_codec)
+	}, Error)
+
+  t.is(error.message, 'Invalid value for required parameter codec: null')
+
+  t.end()
+})
+
+test.cb('throws error when `host` or `port` are falsey', (t) => {
+  const error = t.throws(() => {
+		adapter.connect({ host: null, port: null })
+	}, Error)
+  
+  adapter.disconnect()
+
+  t.is(error.message, 'Invalid value for required parameters host and port: #connect({ host: null, port: null })')
+
+  t.end()
+})
+
+test.cb.skip('handles connection errors', (t) => {
+  // TODO
+})
